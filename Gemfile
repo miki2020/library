@@ -52,3 +52,6 @@ end
 gem "rspec", "~> 3.13"
 
 gem "rspec-rails", "~> 8.0"
+
+# Cron job scheduling [https://github.com/javan/whenever]
+gem "whenever", require: false
