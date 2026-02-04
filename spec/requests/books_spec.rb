@@ -17,11 +17,12 @@ RSpec.describe "/books", type: :request do
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    # skip("Add a hash of attributes valid for your model")
+    { title: "Sample Book", author: "Sample Author" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { title: nil, author: nil }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -85,7 +86,7 @@ RSpec.describe "/books", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: "Updated Book Title", author: "Updated Author" }
       }
 
       it "updates the requested book" do
@@ -93,7 +94,8 @@ RSpec.describe "/books", type: :request do
         patch book_url(book),
               params: { book: new_attributes }, headers: valid_headers, as: :json
         book.reload
-        skip("Add assertions for updated state")
+        expect(book.title).to eq("Updated Book Title")
+        expect(book.author).to eq("Updated Author")
       end
 
       it "renders a JSON response with the book" do

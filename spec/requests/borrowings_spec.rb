@@ -16,12 +16,15 @@ RSpec.describe "/borrowings", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Borrowing. As you add validations to Borrowing, be sure to
   # adjust the attributes here as well.
+  let(:book) { Book.create!(title: "Test Book", author: "Test Author") }
+  let(:reader) { Reader.create!(name: "Test Reader", email: "reader@example.com") }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { book_id: book.id, reader_id: reader.id, borrow_date: Date.today }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { book_id: nil, reader_id: nil, borrow_date: nil }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -85,7 +88,7 @@ RSpec.describe "/borrowings", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { return_date: Date.today + 7.days }
       }
 
       it "updates the requested borrowing" do
@@ -93,7 +96,7 @@ RSpec.describe "/borrowings", type: :request do
         patch borrowing_url(borrowing),
               params: { borrowing: new_attributes }, headers: valid_headers, as: :json
         borrowing.reload
-        skip("Add assertions for updated state")
+        expect(borrowing.return_date).to eq(Date.today + 7.days)
       end
 
       it "renders a JSON response with the borrowing" do

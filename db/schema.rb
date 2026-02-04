@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_02_03_202315) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "books", force: :cascade do |t|
     t.string "author"
     t.datetime "created_at", null: false
@@ -24,7 +27,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_03_202315) do
     t.integer "book_id", null: false
     t.date "borrow_date"
     t.datetime "created_at", null: false
-    t.virtual "due_date", type: :date, as: "borrow_date + 30", stored: true
+    t.virtual "due_date", type: :date, as: "(borrow_date + 30)", stored: true
     t.integer "reader_id", null: false
     t.date "return_date"
     t.datetime "updated_at", null: false

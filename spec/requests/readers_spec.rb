@@ -17,11 +17,11 @@ RSpec.describe "/readers", type: :request do
   # Reader. As you add validations to Reader, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: "Test Reader", email: "reader@example.com" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil, email: nil }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -85,7 +85,7 @@ RSpec.describe "/readers", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "Updated Reader", email: "updated@example.com" }
       }
 
       it "updates the requested reader" do
@@ -93,7 +93,8 @@ RSpec.describe "/readers", type: :request do
         patch reader_url(reader),
               params: { reader: new_attributes }, headers: valid_headers, as: :json
         reader.reload
-        skip("Add assertions for updated state")
+        expect(reader.name).to eq("Updated Reader")
+        expect(reader.email).to eq("updated@example.com")
       end
 
       it "renders a JSON response with the reader" do

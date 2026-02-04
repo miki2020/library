@@ -5,12 +5,12 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
 
-    render json: @books, methods: [:borrowed]
+    render json: @books, methods: [ :borrowed ]
   end
 
   # GET /books/1
   def show
-    render json: [@book], methods: [:borrowed, :borrowings]
+    render json: [ @book ], methods: [ :borrowed, :borrowings ]
   end
 
   # POST /books
@@ -18,7 +18,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      render json: @book, methods: [:borrowed], status: :created, location: @book
+      render json: @book, methods: [ :borrowed ], status: :created, location: @book
     else
       render json: @book.errors, status: :unprocessable_content
     end
@@ -27,7 +27,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   def update
     if @book.update(book_params)
-      render json: @book, methods: [:borrowed]
+      render json: @book, methods: [ :borrowed ]
     else
       render json: @book.errors, status: :unprocessable_content
     end
@@ -46,6 +46,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.expect(book: [ :serial_number, :titile, :author ])
+      params.expect(book: [ :serial_number, :title, :author ])
     end
 end

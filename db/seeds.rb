@@ -15,7 +15,7 @@
     author: "Author #{i + 1}"
   )
 end
- # Create 2 readers
+# Create 2 readers
 2.times do |i|
   Reader.find_or_create_by!(
     name: "Reader #{i + 1}",
@@ -24,26 +24,26 @@ end
 end
 
 # Create 3 borrowing record
-BorrowingRecord.find_or_create_by!(
+Borrowing.find_or_create_by!(
   book: Book.first,
   reader: Reader.first,
-  borrowed_date: Date.today,
+  borrow_date: Date.today,
   due_date: Date.today + 30.days,
   return_date: nil
 )
 
-BorrowingRecord.find_or_create_by!(
+Borrowing.find_or_create_by!(
   book: Book.second,
   reader: Reader.second,
-  borrowed_date: Date.today,
+  borrow_date: Date.today,
   due_date: Date.today + 30.days,
   return_date: Date.today + 15.days
 )
 
-BorrowingRecord.find_or_create_by!(
+Borrowing.find_or_create_by!(
   book: Book.third,
   reader: Reader.first,
-  borrowed_date: Date.today - 35.days,
+  borrow_date: Date.today - 35.days,
   due_date: Date.today - 5.days,
   return_date: nil
 )
