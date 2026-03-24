@@ -28,7 +28,6 @@ Borrowing.find_or_create_by!(
   book: Book.first,
   reader: Reader.first,
   borrow_date: Date.today,
-  due_date: Date.today + 30.days,
   return_date: nil
 )
 
@@ -36,14 +35,12 @@ Borrowing.find_or_create_by!(
   book: Book.second,
   reader: Reader.second,
   borrow_date: Date.today,
-  due_date: Date.today + 30.days,
   return_date: Date.today + 15.days
 )
 
 Borrowing.find_or_create_by!(
-  book: Book.third,
+  book: Book.first,
   reader: Reader.first,
-  borrow_date: Date.today - 35.days,
-  due_date: Date.today - 5.days,
+  borrow_date: Date.today,
   return_date: nil
 )
