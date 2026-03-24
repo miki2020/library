@@ -3,7 +3,7 @@ class Borrowing < ApplicationRecord
   belongs_to :reader
   validates :borrow_date, presence: true
 
-  validate double_borrowing, on: :create
+  validate :double_borrowing, on: :create
 
   private
 
